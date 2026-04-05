@@ -3,7 +3,18 @@
     "allow": [
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(npx vercel:*)",
+      "Bash(where vercel:*)",
+      "Bash(where npx:*)",
+      "Bash(gh auth:*)",
+      "Bash(where git:*)",
+      "Bash(git --version)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:wecandosomethingaboutit.org)",
+      "WebFetch(domain:wecandosomethingaboutit.vercel.app)"
     ]
   }
 }

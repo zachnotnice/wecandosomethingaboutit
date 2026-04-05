@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <h1 class="site-title">We Can Do Something About It</h1>
-    <p class="subtitle">Add your voice. Let's show them how many of us care.</p>
+    <p class="subtitle">You won't put your email in. No balls.</p>
 
     <div class="counter-section">
       <div class="counter" id="counter">0</div>
@@ -18,13 +18,13 @@
 
     <form id="signup-form" class="signup-form">
       <div class="form-group">
-        <label for="email">Your Email</label>
+        <label for="email">Your Email <span class="email-note">(won't send you any bullsh*t)</span></label>
         <input type="email" id="email" placeholder="you@example.com" required>
       </div>
 
       <div class="form-group">
-        <label for="issue">What issue matters most to you? <span class="char-info">(<span id="char-count">0</span>/150)</span></label>
-        <textarea id="issue" placeholder="Tell us in 150 characters or less..." maxlength="150" rows="3"></textarea>
+        <label for="issue">What do you think everyone could agree on? <span class="char-info">(<span id="char-count">0</span>/150)</span></label>
+        <textarea id="issue" placeholder="150 characters or less..." maxlength="150" rows="3"></textarea>
       </div>
 
       <button type="submit" class="btn-submit">I'm In</button>
@@ -36,7 +36,7 @@
     </div>
 
     <div id="issues-section" class="issues-section hidden">
-      <h2>What People Care About</h2>
+      <h2>What People Agree On</h2>
       <div id="issues-list" class="issues-list"></div>
     </div>
   </div>
