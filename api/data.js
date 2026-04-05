@@ -1,4 +1,4 @@
-const { kv } = require("@vercel/kv");
+const { getRedis } = require("./_redis");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
@@ -6,13 +6,12 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const count = (await kv.scard("emails")) || 0;
+    const redis = getRedis();
 
-    const rawIssues = (await kv.lrange("issues", 0, 49)) || [];
-    const issues = rawIssues.map((item) => {
-      if (typeof item === "string") return JSON.parse(item);
-      return item;
-    });
+    const count = (await redis.scard("emails")) || 0;
+
+    const rawIssues = (await redis.lrange("issues", 0, 49)) || [];
+    const issues = rawIssues.map((item) => JSON.parse(item));
 
     return res.status(200).json({ count, issues });
   } catch (err) {

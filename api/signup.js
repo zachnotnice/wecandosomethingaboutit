@@ -1,4 +1,4 @@
-const { kv } = require("@vercel/kv");
+const { getRedis } = require("./_redis");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,19 +16,21 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const alreadyExists = await kv.sismember("emails", email.toLowerCase());
+    const redis = getRedis();
+
+    const alreadyExists = await redis.sismember("emails", email.toLowerCase());
     if (alreadyExists) {
       return res.status(409).json({ error: "This email has already been registered." });
     }
 
-    await kv.sadd("emails", email.toLowerCase());
+    await redis.sadd("emails", email.toLowerCase());
 
     if (issue && typeof issue === "string" && issue.trim().length > 0) {
       const trimmed = issue.trim().slice(0, 150);
-      await kv.lpush("issues", JSON.stringify({ text: trimmed, date: new Date().toISOString() }));
+      await redis.lpush("issues", JSON.stringify({ text: trimmed, date: new Date().toISOString() }));
     }
 
-    const count = await kv.scard("emails");
+    const count = await redis.scard("emails");
     return res.status(200).json({ success: true, count });
   } catch (err) {
     console.error("Signup error:", err);
